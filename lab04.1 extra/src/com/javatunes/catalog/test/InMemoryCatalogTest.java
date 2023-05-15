@@ -25,11 +25,11 @@ class InMemoryCatalogTest {
      * works correctly, you can comment out that call in main() and proceed to the next one.
      */
     public static void main(String[] args) {
-        //testFindById();
+        // testFindById();
         // testFindByKeyword();
         // testFindByCategory();
-         testSize();
-        // testGetAll();
+        // testSize();
+         testGetAll();
     }
 
     private static void testFindById() {
@@ -58,6 +58,8 @@ class InMemoryCatalogTest {
     private static void testGetAll() {
         InMemoryCatalog catalog = new InMemoryCatalog();
         System.out.println(catalog);
+        Collection<MusicItem> allItems = catalog.getAll();
+        allItems.clear();
     }
 
     //helper method to dump a collection of music items vertically
