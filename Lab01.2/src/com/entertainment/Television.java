@@ -1,5 +1,7 @@
 package com.entertainment;
 
+import java.util.Objects;
+
 public class Television {
     //Fields declaration
     private String brand = "LG";
@@ -40,6 +42,14 @@ public class Television {
     }
 
     @Override
+    public int hashCode(){
+        //this is a poorly written hash function, because it easily yields "hash collisions"
+        //a hash collision is when different objectds hash to the same value ( dumb luck)
+        // return getBrand().length() + getVolume();
+        return Objects.hash(getBrand(), getVolume());
+    }
+
+    @Override
     public boolean equals(Object obj){
         boolean result = false;
 
@@ -48,6 +58,8 @@ public class Television {
             //downcast obj to more specific Television so we can call Television methods
             Television other = (Television) obj;
 
+            result = Objects.equals(this.getBrand(), other.getBrand()) &&       //null safe check
+                    this.getVolume() == other.getVolume();                      // primitives can't be null
         }
 
         return result;
