@@ -1,8 +1,16 @@
 package com.entertainment;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Television {
+/*
+ * natural order is defined by brand(String), then by volume(int)
+ *
+ * NOTE: to be consistent with equals, natural order must use the
+ * same properties that are used in equals().
+ * hashCode() must be consistent with equals as well.
+ */
+public class Television implements Comparable<Television> {
     //Fields declaration
     private String brand = "LG";
     private int volume;
@@ -39,6 +47,18 @@ public class Television {
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    //natural order is defined by brand which is a String and then volume(int)
+    @Override
+    public int compareTo(Television other) {
+        int result = this.getBrand().compareTo(other.getBrand());
+
+        if ( result == 0) {
+            result = Integer.compare(this.getVolume(), other.volume);
+        }
+
+        return result;
     }
 
     @Override
