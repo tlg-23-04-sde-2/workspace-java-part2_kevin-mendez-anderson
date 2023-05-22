@@ -14,8 +14,18 @@ public class EmployeeTest {
 
     @Before
     public void setUp() {
-        emp1 = new SalariedEmployee("john", Date.valueOf("2000-1-1"));
-        emp2 = new SalariedEmployee("john", Date.valueOf("2000-1-1"));
+       emp1 = getEmployee();
+       emp2 = getEmployee();
+
+        //emp1 = new DummyEmployee("john", Date.valueOf("2000-1-1"));
+        //emp2 = new DummyEmployee("john", Date.valueOf("2000-1-1"));
+    }
+
+    private Employee getEmployee() {
+        return new Employee("john", Date.valueOf("2000-1-1")) {
+            public double pay() {return 0;}
+            public double payTaxes() {return 0;}
+        };
     }
 
     @Test
@@ -35,5 +45,24 @@ public class EmployeeTest {
     public void equals_shouldReturnTrue_allPropertiesSame() {
         assertEquals(emp1, emp2);       //this does an equals() check for objects
         //assertTrue(emp1.equals(emp2));        //this is an alternative assertion
+    }
+
+    //Member-level named inner classes
+    private class DummyEmployee extends Employee {
+
+
+        public DummyEmployee(String name, Date hireDate) {
+            super(name, hireDate);
+        }
+
+        @Override
+        public double pay() {
+            return 0;
+        }
+
+        @Override
+        public double payTaxes() {
+            return 0;
+        }
     }
 }
