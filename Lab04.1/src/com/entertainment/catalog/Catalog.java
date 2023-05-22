@@ -47,7 +47,7 @@ public class Catalog {
     public static Map<String, Collection<Television>> findByBrands(String... brands) {
         Map<String, Collection<Television>> result = new HashMap<>();
 
-        return null;
+        return result;
     }
 
     /**
